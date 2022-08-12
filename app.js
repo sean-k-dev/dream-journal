@@ -9,7 +9,7 @@ const connectDB = require('./config/db')
 
 dotenv.config({ path: './config/config.env'})
 
-require('./config.passport')(passport)
+require('./config/passport')(passport)
 
 connectDB()
 
@@ -31,7 +31,7 @@ app.engine(
 app.set("view engine", "hbs")
 app.set("views", "./views")
 
-AudioBuffer.use(sesesion({
+app.use(session({
     secret: 'keyboard-cat',
     resave: false,
     saveUninitialized: false,
@@ -44,6 +44,7 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/index'))
+app.use('/auth', require('./routes/auth'))
 
 const PORT = process.env.PORT || 3000
 
