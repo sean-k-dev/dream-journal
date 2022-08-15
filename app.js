@@ -22,10 +22,15 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
+const { formatDate } = require('./routes/helpers/hbs')
+
 app.engine(
   "hbs",
   engine({
     extname: "hbs",
+    helpers: {
+      formatDate, 
+    },
     defaultLayout: 'main',
     layoutsDir: "views/layouts/",
   })
