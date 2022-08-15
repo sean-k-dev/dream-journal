@@ -16,6 +16,7 @@ require('./config/passport')(passport)
 connectDB()
 
 const app = express()
+app.use(express.urlencoded())
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
@@ -52,6 +53,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/dreams', require('./routes/dreams'))
+
 
 const PORT = process.env.PORT || 3000
 
