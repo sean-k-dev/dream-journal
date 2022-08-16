@@ -14,8 +14,8 @@
         <tbody>
             {{#each dreams}}
             <tr>
-                <td><a href="/dreams/{{_id}}"></a>{{title}}</td>
-                <td>{{createdAt}}</td>
+                <td><a href="/dreams/{{_id}}">{{title}}</a></td>
+                <td>{{formatDate createdAt "Do MMMM YYYY, h:mm:ss a"}}</td>
                 <td><span class="dash-status">{{status}}</span></td>
                 <td><span class="dash-status">{{isLucid}}</span></td>
                 <td></td>
