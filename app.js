@@ -22,14 +22,18 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-const { formatDate } = require('./routes/helpers/hbs')
+const { formatDate, stripTags, truncate, editIcon, select } = require('./routes/helpers/hbs')
 
 app.engine(
   "hbs",
   engine({
     extname: "hbs",
     helpers: {
-      formatDate, 
+      formatDate,
+      stripTags,
+      truncate,
+      editIcon,
+      select
     },
     defaultLayout: 'main',
     layoutsDir: "views/layouts/",
@@ -53,6 +57,11 @@ app.use(
   
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user || null
+  next()
+})
 
 app.use(express.static(path.join(__dirname, 'public')))
 
