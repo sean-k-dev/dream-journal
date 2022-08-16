@@ -19,4 +19,53 @@ router.post('/', ensureAuth, async (req, res) => {
     }
 })
 
+router.get('/', ensureAuth, async (req, res) => {
+    try {
+        const dreams = await Dream.find({ status: 'public' })
+            .populate('user')
+            .sort({ createdAt: 'desc'})
+            .lean()
+
+        res.render('dreams/index', {
+            dreams,
+        })
+    } catch (error) {
+        console.error(error)
+        res.render('error/500')
+    }
+})
+
+router.get('/edit/:id', ensureAuth, async(req, res) => {
+    const dream = await Dream.findOne({
+        _id: req.params.id
+    }).lean()
+
+    if (!dream) {
+        return res.render('error/404')
+    }
+
+    if (dream.user != req.user.id) {
+        res.redirect('/dreams')
+    } else {
+        res.render('dreams/edit', {
+            dream
+        })
+    }
+})
+
+router.put('/:id', ensureAuth, async (req, res) => {
+    let dream = await Dream.findById(req.params.id).lean()
+
+    if (!dream) {
+        return res.render('error/404')
+    } else {
+        dream = await Dream.findOneAndUpdate({_id: req.params.id}, req.body, {
+            new: true,
+            runValidators: true
+        })
+
+        res.redirect('/dashboard')
+    }
+})
+
 module.exports = router
