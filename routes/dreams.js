@@ -35,6 +35,26 @@ router.get('/', ensureAuth, async (req, res) => {
     }
 })
 
+router.get('/:id', ensureAuth, async (req, res) => {
+    try {
+        let dream = await Dream.findById(req.params.id)
+            .populate('user')
+            .lean()
+
+        if (!dream) {
+            return res.render('error/404')
+        }
+
+        res.render('dreams/show', {
+            dream
+        })
+    } catch (error) {
+        console.error(error)
+        return res.render('error/500')
+    }
+})
+
+
 router.get('/edit/:id', ensureAuth, async(req, res) => {
     const dream = await Dream.findOne({
         _id: req.params.id
@@ -54,9 +74,11 @@ router.get('/edit/:id', ensureAuth, async(req, res) => {
 })
 
 router.put('/:id', ensureAuth, async (req, res) => {
-    let dream = await Dream.findById(req.params.id).lean()
+    
+    try {
+        let dream = await Dream.findById(req.params.id).lean()
 
-    if (!dream) {
+        if (!dream) {
         return res.render('error/404')
     } else {
         dream = await Dream.findOneAndUpdate({_id: req.params.id}, req.body, {
@@ -65,6 +87,39 @@ router.put('/:id', ensureAuth, async (req, res) => {
         })
 
         res.redirect('/dashboard')
+    }
+    } catch (error) {
+        console.error(error)
+        return res.render('error/500')
+    }
+})
+
+router.delete('/:id', ensureAuth, async (req, res) => {
+    try {
+        await Dream.remove({ _id: req.params.id })
+        res.redirect('/dashboard')
+    } catch (error) {
+        console.error(error)
+        return res.render('error/500')
+    }
+})
+
+
+router.get('/user/:userId', ensureAuth, async (req, res) => {
+    try {
+        const dreams = await Dream.find({
+            user: req.params.userId,
+            status: 'public'
+        })
+        .populate('user')
+        .lean()
+
+        res.render('dreams/index', {
+            dreams
+        })
+    } catch (error) {
+        console.error(error)
+        res.render('error/500')
     }
 })
 
