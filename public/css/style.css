@@ -46,6 +46,10 @@ html a.login-text {
     background-position: center;
 }
 
+html a.title-bar {
+    width: 70%;
+}
+
 }
 
 .btn-float {
