@@ -1,9 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
 html {
-    min-height: 100%
+    min-height: 100%;
+    font-family: 'Lora', 'Roboto', sans-serif
 }
 
 p {
     margin: 10px 0, !important
+}
+
+html a.title-bar, html h3.title-bar {
+    font-family: 'Berkshire Swash', 'Roboto', cursive
+}
+
+html a.login-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 
 .login-container {
