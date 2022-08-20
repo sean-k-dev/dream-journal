@@ -14,8 +14,8 @@ const DreamSchema = new mongoose.Schema({
         type: String,
     },
     isLucid: {
-        type: Boolean,
-        enum: [true, false]
+        yes: { type: Boolean, required: true, default: true },
+        no: { type: Boolean, required: true, default: true }
     },
     status: {
         type: String,
