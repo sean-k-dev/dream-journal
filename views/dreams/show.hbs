@@ -5,8 +5,13 @@
         </h3>
         <div class="card dream">
             <div class="card-content">
-                <span class="card-title">{{formatDate date 'Do MMMM YYYY, h:mm:ss a'}}</span>
+                <span class="card-title">{{formatDate dream.createdAt 'Do MMMM YYYY, h:mm:ss a'}}</span>
                 {{{dream.body}}}
+                {{#each dreams}}
+                <div class="chip">
+                    <span>{{dream.tags}}</span>
+                </div>
+                {{/each}}
             </div>
         </div>
     </div>
