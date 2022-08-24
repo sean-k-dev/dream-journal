@@ -6,6 +6,8 @@ using the express-session and connect-mongo modules in Node.js.
 
 ![image](https://user-images.githubusercontent.com/101055915/186526526-e64cbfe7-99fc-4772-90c4-83b7737be750.png)
 
+Current live build hosted on Heroku: http://dream-tracker-skdev.herokuapp.com/
+
 # Features
 - Dashboard showing all the dreams a user has logged, both public and private, along with edit and delete functions for each dream
 - An add button that allows a user to log a new dream with a title, story and lucid dreaming toggle (WIP)
