@@ -10,7 +10,7 @@ using the express-session and connect-mongo modules in Node.js.
 - Dashboard showing all the dreams a user has logged, both public and private, along with edit and delete functions for each dream
 - An add button that allows a user to log a new dream with a title, story and lucid dreaming toggle (WIP)
 - A public compendium of dreams from all users, allowing you to view all dreams with a "public" property in MongoDB
-- View onky stories from specific users, by clicking on their profile name
+- View only stories from specific users, by clicking on their profile name
 
 ![image](https://user-images.githubusercontent.com/101055915/186528633-680208f3-bd55-4dfa-ba53-11bcf7b4fa17.png)
 
